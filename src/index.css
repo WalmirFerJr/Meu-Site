@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply antialiased font-sans;
+  background-color: #FDFBF7;
+  color: #262322;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body {
+  background-color: #1A1612;
+  color: #E8E0D6;
+}
+
+@layer components {
+  .section-title {
+    @apply text-3xl md:text-4xl font-semibold text-[#262322] dark:text-dark-text-primary mb-2 font-sans;
+  }
+  .section-title::after {
+    content: '';
+    @apply block w-12 h-0.5 rounded-full mt-3;
+    background: linear-gradient(to right, #8B572A, #A0683A);
+  }
+  .dark .section-title::after {
+    background: linear-gradient(to right, #C9A882, #D4B896);
+  }
+  .section-subtitle {
+    @apply text-[#262322]/70 dark:text-dark-text-secondary text-lg max-w-2xl;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-lg transition-all;
+    background: linear-gradient(135deg, #8B572A 0%, #A0683A 100%);
+    color: #FDFBF7;
+  }
+  .dark .btn-primary {
+    background: linear-gradient(135deg, #C9A882 0%, #D4B896 100%);
+    color: #1A1612;
+  }
+  .btn-primary:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 0 20px rgba(139, 87, 42, 0.3);
+    transform: translateY(-1px);
+  }
+  .dark .btn-primary:hover {
+    box-shadow: 0 0 20px rgba(201, 168, 130, 0.4);
+  }
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-6 py-3 border border-[#EFE9E1] dark:border-dark-border-medium text-[#262322] dark:text-dark-text-primary font-medium rounded-lg transition-colors hover:border-accent-primary dark:hover:border-dark-accent-primary hover:text-accent-primary dark:hover:text-dark-accent-primary;
+  }
+  .card-glass {
+    @apply bg-[#FDFBF7] dark:bg-dark-border-soft backdrop-blur-md border border-[#EFE9E1] dark:border-dark-border-medium shadow-subtle;
+  }
+}
+
+/* Liquid gooey effect filters */
+.liquid-blur {
+  filter: url(#gooey);
+}
+
+/* Smooth fade-in animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Glow effects for LED animation */
+.glow-light {
+  box-shadow: 0 0 20px rgba(139, 87, 42, 0.6), 0 0 40px rgba(139, 87, 42, 0.4), inset 0 0 20px rgba(139, 87, 42, 0.2);
+}
+
+.dark .glow-dark {
+  box-shadow: 0 0 20px rgba(201, 168, 130, 0.6), 0 0 40px rgba(201, 168, 130, 0.4), inset 0 0 20px rgba(201, 168, 130, 0.2);
+}
