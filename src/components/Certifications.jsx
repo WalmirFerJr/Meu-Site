@@ -1,6 +1,10 @@
 import { motion } from 'framer-motion'
-import { certifications } from '../data/certifications'
+//import { certifications } from '../data/certifications'
 import ScrollArrow from './ScrollArrow'
+
+const certifications = [
+  { id: '1', title: 'Teste', credentialUrl: 'https://google.com' }
+]
 
 export default function Certifications() {
  // if (!certifications.length) return null
