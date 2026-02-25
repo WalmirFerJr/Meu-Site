@@ -3,7 +3,7 @@ import { certifications } from '../data/certifications'
 import ScrollArrow from './ScrollArrow'
 
 export default function Certifications() {
-  if (!certifications.length) return null
+ // if (!certifications.length) return null
 
   return (
     <section
