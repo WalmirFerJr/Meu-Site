@@ -30,13 +30,4 @@ export const projects = [
     repo: 'https://github.com/dasiusp/IntercompBot',
     demoUrl: null,
   },
-  {
-    id: 'triagem-hospitalar',
-    title: 'Triagem Hospitalar',
-    description:
-      'Sistema em C com classificação por prioridade (cores) e tempo de espera. Escalonamento dinâmico e ordenação customizada (qsort). Processamento de CSV com alocação dinâmica de memória, sem vazamentos.',
-    tech: ['C', 'Algoritmos de Ordenação', 'CSV'],
-    repo: 'https://github.com/WalmirFerJr/Analisador-de-Dados-e-Otimizacao-Combinatoria',
-    demoUrl: null,
-  },
 ]
