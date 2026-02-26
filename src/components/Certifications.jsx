@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-//import { certifications } from '../data/certifications'
+import { certifications } from '../data/certifications'
 import ScrollArrow from './ScrollArrow'
 
 export default function Certifications() {

@@ -13,7 +13,7 @@ export const projects = [
     demoUrl: null,
   },
   {
-    id: 'testee',
+    id: 'eventos-tech',
     title: 'Gerenciador de Eventos Tech',
     description:
       'API REST em Java + Spring Boot + Maven e banco de dados em PostgreSQL, schema via Flyway e deploy com isolamento de rede (VPC), EC2, RDS e S3; containerização com Docker para ambiente reproduzível.',
