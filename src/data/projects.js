@@ -4,6 +4,15 @@
  */
 export const projects = [
   {
+    id: 'Aveta-carteira-de-investimentos',
+    title: 'Simulador de carteira de investimentos',
+    description:
+      'Projeto desenvolvido a partir do meu grande interesse no mercado financeiro unido com a tecnologia e com a inspiração de refator meu TCC do curso técnico de ADS.',
+    tech: ['Java', 'Spring Boot', 'Docker', 'PostgreSQL', 'Maven'],
+    repo: 'https://github.com/WalmirFerJr/AvetaSoftware2.0',
+    demoUrl: null,
+  },
+  {
     id: 'eventos-tech',
     title: 'Gerenciador de Eventos Tech',
     description:

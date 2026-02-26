@@ -2,12 +2,8 @@ import { motion } from 'framer-motion'
 //import { certifications } from '../data/certifications'
 import ScrollArrow from './ScrollArrow'
 
-const certifications = [
-  { id: '1', title: 'Teste', credentialUrl: 'https://google.com' }
-]
-
 export default function Certifications() {
- // if (!certifications.length) return null
+  if (!certifications.length) return null
 
   return (
     <section
@@ -27,11 +23,11 @@ export default function Certifications() {
           Certificações
         </motion.h2>
         <motion.p
-       //   className="section-subtitle mb-10"
-       //   initial={{ opacity: 0, y: 20 }}
-       //   whileInView={{ opacity: 1, y: 0 }}
-       //   viewport={{ once: true }}
-       //   transition={{ duration: 0.6, delay: 0.1 }}
+          className="section-subtitle mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
         >
           Credenciais e links para verificação.
         </motion.p>
