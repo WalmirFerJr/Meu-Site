@@ -19,5 +19,4 @@ export const certifications = [
     title: 'Explorando a Linguagem C',
     credentialUrl: 'https://www.coursera.org/account/accomplishments/records/AX0TTETHY70W',
   },
-  // Adicione mais: { id: '...', title: '...', credentialUrl: '...' },
 ]
