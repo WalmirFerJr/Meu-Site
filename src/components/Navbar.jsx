@@ -23,8 +23,8 @@ export default function Navbar() {
         >
           WF
         </a>
-        <div className="hidden md:flex items-center gap-8">
-          <ul className="flex items-center gap-8" role="list">
+        <div className="hidden lg:flex items-center gap-5 xl:gap-7">
+          <ul className="flex items-center gap-5 xl:gap-7" role="list">
             {navLinks.map((link, index) => (
               <motion.li
                 key={link.href}
@@ -45,7 +45,7 @@ export default function Navbar() {
           <ResumeButton variant="nav" label="Currículo" />
           <ThemeToggle onMount={setToggleRef} />
         </div>
-        <div className="flex items-center gap-4 md:hidden">
+        <div className="flex items-center gap-3 lg:hidden">
           <ThemeToggle onMount={setToggleRef} />
           <button
             type="button"
@@ -69,7 +69,7 @@ export default function Navbar() {
         {isOpen && (
           <motion.div
             id="nav-menu-mobile"
-            className="md:hidden border-t border-[#EFE9E1] dark:border-dark-border-medium bg-[#FDFBF7]/98 dark:bg-dark-canvas/98 backdrop-blur-md px-6 py-4"
+            className="lg:hidden border-t border-[#EFE9E1] dark:border-dark-border-medium bg-[#FDFBF7]/98 dark:bg-dark-canvas/98 backdrop-blur-md px-6 py-4"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
