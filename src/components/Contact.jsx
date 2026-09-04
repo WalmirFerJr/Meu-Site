@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import ResumeButton from './ResumeButton'
 
 export default function Contact() {
   const contactLinks = [
@@ -85,6 +86,15 @@ export default function Contact() {
             </motion.a>
           ))}
         </div>
+        <motion.div
+          className="w-full flex justify-center mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <ResumeButton variant="primary" label="Baixar currículo em PDF" />
+        </motion.div>
         <motion.div
           className="w-full flex justify-center"
           initial={{ opacity: 0 }}

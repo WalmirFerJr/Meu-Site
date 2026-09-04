@@ -7,6 +7,7 @@ import IntroComponent from './components/IntroComponent'
 import { useSplashScreen } from './hooks/useSplashScreen'
 
 const About = lazy(() => import('./components/About'))
+const Experience = lazy(() => import('./components/Experience'))
 const Education = lazy(() => import('./components/Education'))
 const Skills = lazy(() => import('./components/Skills'))
 const Projects = lazy(() => import('./components/Projects'))
@@ -45,6 +46,7 @@ function App() {
               <Hero />
               <Suspense fallback={<SectionFallback />}>
                 <About />
+                <Experience />
                 <Education />
                 <Projects />
                 <Activities />

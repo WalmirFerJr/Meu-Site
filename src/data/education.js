@@ -5,7 +5,7 @@ export const educationItems = [
     institution: 'Universidade de São Paulo (USP)',
     institutionUrl: 'https://jornal.usp.br/institucional/usp-e-a-melhor-universidade-brasileira-no-ranking-qs-latin-america/',
     period: 'Previsão de conclusão: 2028',
-    detail: '3º semestre',
+    detail: '4º semestre',
   },
   {
     id: 'etec',

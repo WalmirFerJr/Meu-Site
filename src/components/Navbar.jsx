@@ -4,6 +4,8 @@ import { navLinks } from '../data/navLinks'
 import { motion, AnimatePresence } from 'framer-motion'
 import ThemeToggle from './ThemeToggle'
 import ThemeToggleHint from './ThemeToggleHint'
+import ScrollProgress from './ScrollProgress'
+import ResumeButton from './ResumeButton'
 
 export default function Navbar() {
   const [isOpen, toggle] = useToggle(false)
@@ -40,6 +42,7 @@ export default function Navbar() {
               </motion.li>
             ))}
           </ul>
+          <ResumeButton variant="nav" label="Currículo" />
           <ThemeToggle onMount={setToggleRef} />
         </div>
         <div className="flex items-center gap-4 md:hidden">
@@ -91,9 +94,13 @@ export default function Navbar() {
                 </motion.li>
               ))}
             </ul>
+            <div className="mt-4 pt-4 border-t border-[#EFE9E1] dark:border-dark-border-medium">
+              <ResumeButton variant="nav" label="Baixar currículo" className="w-full justify-center" />
+            </div>
           </motion.div>
         )}
         </AnimatePresence>
+      <ScrollProgress />
       <ThemeToggleHint toggleRef={toggleRef} />
     </nav>
   )

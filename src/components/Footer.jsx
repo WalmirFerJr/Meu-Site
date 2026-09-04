@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion'
+import ResumeButton from './ResumeButton'
 
 export default function Footer() {
   const year = new Date().getFullYear()
 
   const footerLinks = [
     { href: '#about', label: 'Sobre' },
+    { href: '#experience', label: 'Experiência' },
     { href: '#education', label: 'Formação' },
     { href: '#projects', label: 'Projetos' },
     { href: '#activities', label: 'Atividades' },
@@ -23,9 +25,10 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-[#262322]/70 dark:text-dark-text-secondary text-sm">
+            <p className="text-[#262322]/70 dark:text-dark-text-secondary text-sm mb-3">
               © {year} Walmir Fernandes Junior. React, Vite, Tailwind.
             </p>
+            <ResumeButton variant="ghost" label="Baixar currículo (PDF)" />
           </motion.div>
           <nav aria-label="Links do rodapé">
             <motion.div

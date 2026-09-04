@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import ScrollArrow from './ScrollArrow'
 import ProfileImageWithLED from './ProfileImageWithLED'
+import ResumeButton from './ResumeButton'
 
 export default function About() {
   return (
@@ -47,24 +48,35 @@ export default function About() {
             transition={{ duration: 0.6 }}
           >
             <p>
-              Sou um estudante apaixonado por tecnologia e resolução de problemas, com forte interesse na área de finanças e
-              atualmente movido pela vontade de aprender cada dia mais e me profissionalizar dentro da minha área. Possuo
-              Foco em <strong className="text-accent-primary dark:text-dark-accent-primary">desenvolvimento backend</strong> e
-              experiência com Python, Java, SQL, AWS e Linux em projetos reais.
+              Sou estudante de Sistemas de Informação na USP e atuo com{' '}
+              <strong className="text-accent-primary dark:text-dark-accent-primary">engenharia de dados e de software</strong>{' '}
+              no mercado financeiro. Hoje construo pipelines de grande volumetria e soluções de IA aplicada no{' '}
+              <strong className="text-[#262322] dark:text-dark-text-primary">Itaú Unibanco</strong>, depois de desenvolver
+              automações fullstack e arquiteturas orientadas a eventos no{' '}
+              <strong className="text-[#262322] dark:text-dark-text-primary">BTG Pactual</strong>.
             </p>
             <p>
-              Este portfólio é uma vitrine de que também consigo entregar uma interface clara e performática,
-              mesmo meu foco sendo em me especializar em conceitos de system design, estrutura de dados, banco de dados, infraestrutura
-              e outras habilidade imprescindíveis para um bom engenheiro de software.
+              Meu trabalho vive entre Python, FastAPI, SQL e AWS — Glue, Athena, Lambda, S3 e DynamoDB —, sempre com
+              atenção a custo de consulta, escalabilidade e segurança. Trato dado como produto: modelagem em camadas,
+              ownership por domínio e automação de tudo que for repetitivo.
             </p>
             <p>
-              Busco um <strong className="text-accent-primary dark:text-dark-accent-primary">estágio</strong> em engenharia de software para contribuir
-              com código de qualidade e aprender com times experientes dentro de sistemas em produção.
+              Meu objetivo é me tornar um{' '}
+              <strong className="text-accent-primary dark:text-dark-accent-primary">engenheiro de software qualificado</strong>,
+              e por isso invisto em system design, estruturas de dados, bancos de dados e infraestrutura. Este portfólio
+              é a prova de que também entrego uma interface clara e performática.
             </p>
+            <p>
+              Busco desafios em <strong className="text-accent-primary dark:text-dark-accent-primary">engenharia de software</strong>{' '}
+              para escrever código de qualidade e aprender com times experientes dentro de sistemas em produção.
+            </p>
+            <div className="pt-2">
+              <ResumeButton variant="ghost" label="Baixar currículo em PDF" />
+            </div>
           </motion.div>
         </div>
       </div>
-      <ScrollArrow targetId="education" />
+      <ScrollArrow targetId="experience" />
     </section>
   )
 }
