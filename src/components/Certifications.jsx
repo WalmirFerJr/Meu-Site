@@ -8,7 +8,7 @@ export default function Certifications() {
   return (
     <section
       id="certifications"
-      className="py-20 px-6 bg-[#FDFBF7] dark:bg-dark-canvas"
+      className="py-20 px-6 bg-[#F9FBF8] dark:bg-dark-canvas"
       aria-labelledby="certifications-heading"
     >
       <div className="max-w-3xl mx-auto">
@@ -44,10 +44,10 @@ export default function Certifications() {
                 href={cert.credentialUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-between gap-4 py-3 px-4 rounded-lg border border-[#EFE9E1] dark:border-dark-border-medium bg-[#FDFBF7] dark:bg-dark-border-soft text-[#262322] dark:text-dark-text-primary hover:border-accent-primary dark:hover:border-dark-accent-primary/50 hover:text-accent-primary dark:hover:text-dark-accent-primary transition-all hover:shadow-subtle"
+                className="flex items-center justify-between gap-4 py-3 px-4 rounded-lg border border-[#E5DBCF] dark:border-dark-border-medium bg-[#F9FBF8] dark:bg-dark-border-soft text-[#17161C] dark:text-dark-text-primary hover:border-accent-primary dark:hover:border-dark-accent-primary/50 hover:text-accent-primary dark:hover:text-dark-accent-primary transition-all hover:shadow-subtle"
               >
                 <span>{cert.title}</span>
-                <span className="text-[#262322]/50 dark:text-dark-text-secondary text-xs shrink-0">Ver credencial →</span>
+                <span className="text-[#17161C]/50 dark:text-dark-text-secondary text-xs shrink-0">Ver credencial →</span>
               </a>
             </motion.li>
           ))}

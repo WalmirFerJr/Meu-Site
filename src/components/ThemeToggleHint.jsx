@@ -92,7 +92,7 @@ export default function ThemeToggleHint({ toggleRef }) {
             </motion.div>
             
             {/* Tooltip */}
-            <div className="bg-[#262322] dark:bg-dark-text-primary text-[#FDFBF7] dark:text-dark-canvas px-3 py-2 rounded-lg text-xs font-medium whitespace-nowrap shadow-lg">
+            <div className="bg-[#17161C] dark:bg-dark-text-primary text-[#F9FBF8] dark:text-dark-canvas px-3 py-2 rounded-lg text-xs font-medium whitespace-nowrap shadow-lg">
               Alterar tema
             </div>
           </div>

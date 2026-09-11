@@ -44,7 +44,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="py-12 px-6 bg-[#FDFBF7] dark:bg-dark-canvas border-t border-[#EFE9E1] dark:border-dark-border-medium"
+      className="py-12 px-6 bg-[#F9FBF8] dark:bg-dark-canvas border-t border-[#E5DBCF] dark:border-dark-border-medium"
       aria-labelledby="contact-heading"
     >
       <div className="max-w-2xl mx-auto text-center">
@@ -74,7 +74,7 @@ export default function Contact() {
               href={link.href}
               target={link.href.startsWith('http') ? '_blank' : undefined}
               rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-lg card-glass text-[#262322] dark:text-dark-text-primary hover:border-accent-primary dark:hover:border-dark-accent-primary transition-all hover:shadow-soft"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-lg card-glass text-[#17161C] dark:text-dark-text-primary hover:border-accent-primary dark:hover:border-dark-accent-primary transition-all hover:shadow-soft"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
@@ -102,7 +102,7 @@ export default function Contact() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <p className="text-[#262322]/50 dark:text-dark-text-secondary text-sm">São Paulo, Brasil</p>
+          <p className="text-[#17161C]/50 dark:text-dark-text-secondary text-sm">São Paulo, Brasil</p>
         </motion.div>
       </div>
     </section>

@@ -7,7 +7,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="py-20 px-6 bg-[#FDFBF7] dark:bg-dark-canvas"
+      className="py-20 px-6 bg-[#F9FBF8] dark:bg-dark-canvas"
       aria-labelledby="about-heading"
     >
       <div className="max-w-6xl mx-auto">
@@ -41,7 +41,7 @@ export default function About() {
             <ProfileImageWithLED src="/images/foto-perfil.png" alt="Walmir Fernandes Junior" />
           </motion.div>
           <motion.div
-            className="md:col-span-3 space-y-4 text-[#262322] dark:text-dark-text-primary leading-relaxed"
+            className="md:col-span-3 space-y-4 text-[#17161C] dark:text-dark-text-primary leading-relaxed"
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -51,9 +51,9 @@ export default function About() {
               Sou estudante de Sistemas de Informação na USP e atuo com{' '}
               <strong className="text-accent-primary dark:text-dark-accent-primary">engenharia de dados e de software</strong>{' '}
               no mercado financeiro. Hoje construo pipelines de grande volumetria e soluções de IA aplicada no{' '}
-              <strong className="text-[#262322] dark:text-dark-text-primary">Itaú Unibanco</strong>, depois de desenvolver
+              <strong className="text-[#17161C] dark:text-dark-text-primary">Itaú Unibanco</strong>, depois de desenvolver
               automações fullstack e arquiteturas orientadas a eventos no{' '}
-              <strong className="text-[#262322] dark:text-dark-text-primary">BTG Pactual</strong>.
+              <strong className="text-[#17161C] dark:text-dark-text-primary">BTG Pactual</strong>.
             </p>
             <p>
               Meu trabalho vive entre Python, FastAPI, SQL e AWS — Glue, Athena, Lambda, S3 e DynamoDB —, sempre com
