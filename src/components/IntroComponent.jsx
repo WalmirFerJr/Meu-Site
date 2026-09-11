@@ -27,7 +27,7 @@ const WelcomeText = memo(({ reverse = false, onEnterComplete }) => {
       {letters.map((letter, i) => (
         <motion.span
           key={i}
-          className="text-[#262322] dark:text-dark-text-primary select-none font-semibold"
+          className="text-[#17161C] dark:text-dark-text-primary select-none font-semibold"
           style={{
             fontSize: 'clamp(2rem, 6vw, 3.5rem)',
             letterSpacing: '0.04em',
@@ -67,7 +67,7 @@ const CornerHUD = memo(({ reverse = false }) => (
     {corners.map((cls, i) => (
       <motion.div
         key={i}
-        className={`absolute w-8 h-8 border-[#EFE9E1] dark:border-dark-border-medium/60 ${cls}`}
+        className={`absolute w-8 h-8 border-[#E5DBCF] dark:border-dark-border-medium/60 ${cls}`}
         initial={{ opacity: reverse ? 0.6 : 0 }}
         animate={{ opacity: reverse ? 0 : 0.6 }}
         transition={{ delay: reverse ? i * 0.04 : 0.05 + i * 0.08, duration: 0.4 }}
@@ -80,7 +80,7 @@ CornerHUD.displayName = 'CornerHUD'
 // ─── Subtexto discreto ──────────────────────────────────────────────────────
 const Subtext = memo(({ reverse = false }) => (
   <motion.p
-    className="text-[#262322]/80 dark:text-dark-text-secondary tracking-[0.3em] uppercase text-[10px] font-mono select-none"
+    className="text-[#17161C]/80 dark:text-dark-text-secondary tracking-[0.3em] uppercase text-[10px] font-mono select-none"
     initial={{ opacity: 0 }}
     animate={{ opacity: reverse ? 0 : 0.7 }}
     transition={{ delay: reverse ? 0 : 0.7, duration: 0.6 }}
@@ -97,7 +97,7 @@ const AmbientGlow = memo(({ visible }) => (
       style={{
         width: '50vw',
         height: '50vw',
-        background: 'radial-gradient(circle, rgba(139,87,42,0.08) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(223,209,196,0.10) 0%, transparent 70%)',
         filter: 'blur(50px)',
       }}
     initial={{ opacity: 0, scale: 0.6 }}
@@ -129,7 +129,7 @@ function IntroComponent({ onComplete }) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-[#FDFBF7] dark:bg-dark-canvas"
+      className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-[#F9FBF8] dark:bg-dark-canvas"
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.9, ease: 'easeInOut' }}

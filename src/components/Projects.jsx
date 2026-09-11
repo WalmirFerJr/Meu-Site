@@ -16,11 +16,11 @@ function ProjectCard({ project, index }) {
     >
       <h3
         id={`project-${project.id}-title`}
-        className="font-semibold text-xl text-[#262322] dark:text-dark-text-primary mb-3 group-hover:text-accent-primary dark:group-hover:text-dark-accent-primary transition-colors"
+        className="font-semibold text-xl text-[#17161C] dark:text-dark-text-primary mb-3 group-hover:text-accent-primary dark:group-hover:text-dark-accent-primary transition-colors"
       >
         {project.title}
       </h3>
-      <p className="text-[#262322]/70 dark:text-dark-text-secondary text-sm leading-relaxed mb-4 flex-1">
+      <p className="text-[#17161C]/70 dark:text-dark-text-secondary text-sm leading-relaxed mb-4 flex-1">
         {project.description}
       </p>
       <div className="flex flex-wrap gap-2 mb-4">
@@ -33,13 +33,13 @@ function ProjectCard({ project, index }) {
           </span>
         ))}
       </div>
-      <div className="flex flex-wrap gap-3 pt-2 border-t border-[#EFE9E1] dark:border-dark-border-medium">
+      <div className="flex flex-wrap gap-3 pt-2 border-t border-[#E5DBCF] dark:border-dark-border-medium">
         {hasDemo && (
           <a
             href={project.demoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm bg-gradient-to-r from-accent-primary to-accent-hover dark:from-dark-accent-primary dark:to-dark-accent-hover text-[#FDFBF7] dark:text-dark-canvas hover:brightness-110 transition-all"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm bg-gradient-to-r from-accent-primary to-accent-hover dark:from-dark-accent-primary dark:to-dark-accent-hover text-[#F9FBF8] dark:text-dark-canvas hover:brightness-110 transition-all"
           >
             <span aria-hidden>▶</span>
             Demo
@@ -49,7 +49,7 @@ function ProjectCard({ project, index }) {
           href={project.repo}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm border border-[#EFE9E1] dark:border-dark-border-medium text-[#262322] dark:text-dark-text-primary hover:border-accent-primary dark:hover:border-dark-accent-primary hover:text-accent-primary dark:hover:text-dark-accent-primary transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm border border-[#E5DBCF] dark:border-dark-border-medium text-[#17161C] dark:text-dark-text-primary hover:border-accent-primary dark:hover:border-dark-accent-primary hover:text-accent-primary dark:hover:text-dark-accent-primary transition-colors"
         >
           <span aria-hidden>{"</>"}</span>
           Repo
@@ -63,7 +63,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="py-20 px-6 bg-[#FDFBF7] dark:bg-dark-canvas"
+      className="py-20 px-6 bg-[#F9FBF8] dark:bg-dark-canvas"
       aria-labelledby="projects-heading"
     >
       <div className="max-w-6xl mx-auto">

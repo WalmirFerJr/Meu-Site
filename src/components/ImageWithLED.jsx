@@ -13,8 +13,7 @@ export default function ImageWithLED({ src, alt, className = '', rounded = 'lg' 
   }
 
   const roundedClass = rounded === '2xl' ? 'rounded-2xl' : 'rounded-lg'
-  const viewBoxSize = rounded === '2xl' ? 400 : 300
-  const cornerRadius = rounded === '2xl' ? 32 : 16
+  const cornerRadius = rounded === '2xl' ? 16 : 8
 
   return (
     <div
@@ -44,14 +43,16 @@ export default function ImageWithLED({ src, alt, className = '', rounded = 'lg' 
         className="absolute inset-0 pointer-events-none"
         width="100%"
         height="100%"
-        viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}
-        preserveAspectRatio="xMidYMid meet"
-        style={{ filter: isComplete ? 'drop-shadow(0 0 15px rgba(139, 87, 42, 0.6)) drop-shadow(0 0 30px rgba(139, 87, 42, 0.4))' : 'none' }}
+        style={{ filter: isComplete ? 'drop-shadow(0 0 15px rgba(60, 50, 51, 0.6)) drop-shadow(0 0 30px rgba(60, 50, 51, 0.4))' : 'none' }}
       >
-        <motion.path
-          d={`M ${cornerRadius} 0 L ${viewBoxSize - cornerRadius} 0 Q ${viewBoxSize} 0 ${viewBoxSize} ${cornerRadius} L ${viewBoxSize} ${viewBoxSize - cornerRadius} Q ${viewBoxSize} ${viewBoxSize} ${viewBoxSize - cornerRadius} ${viewBoxSize} L ${cornerRadius} ${viewBoxSize} Q 0 ${viewBoxSize} 0 ${viewBoxSize - cornerRadius} L 0 ${cornerRadius} Q 0 0 ${cornerRadius} 0 Z`}
+        <motion.rect
+          x="1.5"
+          y="1.5"
+          width="calc(100% - 3px)"
+          height="calc(100% - 3px)"
+          rx={cornerRadius}
           fill="none"
-          stroke="#8B572A"
+          stroke="#3C3233"
           strokeWidth="3"
           className="dark:stroke-dark-accent-primary"
           initial={{ pathLength: 0, opacity: 0 }}

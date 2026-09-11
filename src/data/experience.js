@@ -6,6 +6,8 @@ export const experiences = [
   {
     id: 'itau',
     company: 'Itaú Unibanco S.A.',
+    logo: '/images/itau.svg',
+    logoBackdrop: 'light',
     role: 'Estagiário de Engenharia de Dados e IA',
     area: 'Câmbio e Digital Assets',
     period: 'Jul 2026 – Atual',
@@ -22,6 +24,8 @@ export const experiences = [
   {
     id: 'btg',
     company: 'BTG Pactual S.A.',
+    logo: '/images/btg-pactual.png',
+    logoBackdrop: 'dark',
     role: 'Short Job em Engenharia de Software',
     area: 'Automação e arquitetura orientada a eventos',
     period: 'Abr 2026 – Jul 2026',
@@ -38,6 +42,8 @@ export const experiences = [
   {
     id: 'dasi',
     company: 'Diretório Acadêmico de Sistemas de Informação',
+    logo: '/images/usp.jpg',
+    logoBackdrop: 'light',
     role: 'Coordenador de TI',
     area: 'USP – EACH',
     period: 'Mar 2025 – Atual',

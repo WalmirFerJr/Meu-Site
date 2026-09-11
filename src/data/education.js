@@ -3,6 +3,8 @@ export const educationItems = [
     id: 'usp',
     title: 'Bacharel em Sistemas de Informação',
     institution: 'Universidade de São Paulo (USP)',
+    logo: '/images/usp.jpg',
+    logoBackdrop: 'light',
     institutionUrl: 'https://jornal.usp.br/institucional/usp-e-a-melhor-universidade-brasileira-no-ranking-qs-latin-america/',
     period: 'Previsão de conclusão: 2028',
     detail: '4º semestre',

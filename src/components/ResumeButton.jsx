@@ -26,7 +26,7 @@ export default function ResumeButton({ variant = 'secondary', label = 'Baixar cu
     nav:
       'inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-medium border border-accent-primary/30 dark:border-dark-accent-primary/30 text-accent-primary dark:text-dark-accent-primary hover:bg-accent-primary/10 dark:hover:bg-dark-accent-primary/10 transition-colors',
     ghost:
-      'inline-flex items-center gap-2 text-sm font-medium text-[#262322]/70 dark:text-dark-text-secondary hover:text-accent-primary dark:hover:text-dark-accent-primary transition-colors',
+      'inline-flex items-center gap-2 text-sm font-medium text-[#17161C]/70 dark:text-dark-text-secondary hover:text-accent-primary dark:hover:text-dark-accent-primary transition-colors',
   }
 
   return (

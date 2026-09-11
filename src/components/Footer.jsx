@@ -16,7 +16,7 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="py-12 px-6 border-t border-[#EFE9E1] dark:border-dark-border-medium bg-[#FDFBF7] dark:bg-dark-canvas" role="contentinfo">
+    <footer className="py-12 px-6 border-t border-[#E5DBCF] dark:border-dark-border-medium bg-[#F9FBF8] dark:bg-dark-canvas" role="contentinfo">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
           <motion.div
@@ -25,7 +25,7 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-[#262322]/70 dark:text-dark-text-secondary text-sm mb-3">
+            <p className="text-[#17161C]/70 dark:text-dark-text-secondary text-sm mb-3">
               © {year} Walmir Fernandes Junior. React, Vite, Tailwind.
             </p>
             <ResumeButton variant="ghost" label="Baixar currículo (PDF)" />
@@ -42,7 +42,7 @@ export default function Footer() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-[#262322]/70 dark:text-dark-text-secondary hover:text-accent-primary dark:hover:text-dark-accent-primary text-sm transition-colors relative group"
+                  className="text-[#17161C]/70 dark:text-dark-text-secondary hover:text-accent-primary dark:hover:text-dark-accent-primary text-sm transition-colors relative group"
                 >
                   {link.label}
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-primary dark:bg-dark-accent-primary transition-all group-hover:w-full" />
@@ -52,14 +52,18 @@ export default function Footer() {
           </nav>
         </div>
         <motion.div
-          className="text-center pt-6 border-t border-[#EFE9E1] dark:border-dark-border-medium"
+          className="text-center pt-6 border-t border-[#E5DBCF] dark:border-dark-border-medium"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <p className="text-[#262322]/50 dark:text-dark-text-secondary text-xs">
+          <p className="text-[#17161C]/50 dark:text-dark-text-secondary text-xs">
             Desenvolvido com foco em performance e experiência do usuário
+          </p>
+          <p className="mt-2 text-[#17161C]/50 dark:text-dark-text-secondary text-xs">
+            Marcas e logotipos pertencem aos respectivos titulares e são exibidos apenas para identificar vínculos
+            acadêmicos e profissionais. O uso não implica patrocínio ou endosso.
           </p>
         </motion.div>
       </div>

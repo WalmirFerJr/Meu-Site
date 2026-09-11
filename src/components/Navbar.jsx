@@ -13,13 +13,13 @@ export default function Navbar() {
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 border-b border-[#EFE9E1] dark:border-dark-border-medium bg-[#FDFBF7]/95 dark:bg-dark-canvas/95 backdrop-blur-md shadow-subtle"
+      className="fixed top-0 left-0 right-0 z-50 border-b border-[#E5DBCF] dark:border-dark-border-medium bg-[#F9FBF8]/95 dark:bg-dark-canvas/95 backdrop-blur-md shadow-subtle"
       aria-label="Navegação principal"
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         <a
           href="#"
-          className="font-semibold text-xl text-[#262322] dark:text-dark-text-primary hover:text-accent-primary dark:hover:text-dark-accent-primary transition-colors"
+          className="font-semibold text-xl text-[#17161C] dark:text-dark-text-primary hover:text-accent-primary dark:hover:text-dark-accent-primary transition-colors"
         >
           WF
         </a>
@@ -34,7 +34,7 @@ export default function Navbar() {
               >
                 <a
                   href={link.href}
-                  className="text-[#262322]/70 dark:text-dark-text-secondary hover:text-accent-primary dark:hover:text-dark-accent-primary transition-colors text-sm font-medium relative group"
+                  className="text-[#17161C]/70 dark:text-dark-text-secondary hover:text-accent-primary dark:hover:text-dark-accent-primary transition-colors text-sm font-medium relative group"
                 >
                   {link.label}
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-primary dark:bg-dark-accent-primary transition-all group-hover:w-full" />
@@ -49,7 +49,7 @@ export default function Navbar() {
           <ThemeToggle onMount={setToggleRef} />
           <button
             type="button"
-            className="p-2 text-[#262322]/70 dark:text-dark-text-secondary hover:text-accent-primary dark:hover:text-dark-accent-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-primary/30 dark:focus:ring-dark-accent-primary/30 transition-colors"
+            className="p-2 text-[#17161C]/70 dark:text-dark-text-secondary hover:text-accent-primary dark:hover:text-dark-accent-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-primary/30 dark:focus:ring-dark-accent-primary/30 transition-colors"
             onClick={toggle}
             aria-expanded={isOpen}
             aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
@@ -69,7 +69,7 @@ export default function Navbar() {
         {isOpen && (
           <motion.div
             id="nav-menu-mobile"
-            className="lg:hidden border-t border-[#EFE9E1] dark:border-dark-border-medium bg-[#FDFBF7]/98 dark:bg-dark-canvas/98 backdrop-blur-md px-6 py-4"
+            className="lg:hidden border-t border-[#E5DBCF] dark:border-dark-border-medium bg-[#F9FBF8]/98 dark:bg-dark-canvas/98 backdrop-blur-md px-6 py-4"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -86,7 +86,7 @@ export default function Navbar() {
                 >
                 <a
                   href={link.href}
-                  className="text-[#262322]/70 dark:text-dark-text-secondary hover:text-accent-primary dark:hover:text-dark-accent-primary transition-colors font-medium block py-1"
+                  className="text-[#17161C]/70 dark:text-dark-text-secondary hover:text-accent-primary dark:hover:text-dark-accent-primary transition-colors font-medium block py-1"
                   onClick={toggle}
                 >
                   {link.label}
@@ -94,7 +94,7 @@ export default function Navbar() {
                 </motion.li>
               ))}
             </ul>
-            <div className="mt-4 pt-4 border-t border-[#EFE9E1] dark:border-dark-border-medium">
+            <div className="mt-4 pt-4 border-t border-[#E5DBCF] dark:border-dark-border-medium">
               <ResumeButton variant="nav" label="Baixar currículo" className="w-full justify-center" />
             </div>
           </motion.div>
