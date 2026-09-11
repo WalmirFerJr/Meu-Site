@@ -4,7 +4,7 @@ export default function DSA() {
   return (
     <section
       id="dsa"
-      className="py-16 px-6 bg-[#FDFBF7]"
+      className="py-16 px-6 bg-[#F9FBF8]"
       aria-labelledby="dsa-heading"
     >
       <div className="max-w-3xl mx-auto">
@@ -34,7 +34,7 @@ export default function DSA() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <p className="text-[#262322] text-sm md:text-base">
+          <p className="text-[#17161C] text-sm md:text-base">
             Interesse em DSA e resolução de problemas. Perfis em plataformas de programação competitiva:
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
@@ -42,7 +42,7 @@ export default function DSA() {
               href="https://leetcode.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-[#EFE9E1] text-[#262322] text-sm font-mono hover:border-accent-primary hover:text-accent-primary transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-[#E5DBCF] text-[#17161C] text-sm font-mono hover:border-accent-primary hover:text-accent-primary transition-colors"
             >
               LeetCode
             </a>
@@ -50,12 +50,12 @@ export default function DSA() {
               href="https://codeforces.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-[#EFE9E1] text-[#262322] text-sm font-mono hover:border-accent-primary hover:text-accent-primary transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-[#E5DBCF] text-[#17161C] text-sm font-mono hover:border-accent-primary hover:text-accent-primary transition-colors"
             >
               Codeforces
             </a>
           </div>
-          <p className="text-[#262322]/50 text-xs w-full text-center">
+          <p className="text-[#17161C]/50 text-xs w-full text-center">
             Substitua os links acima pela URL do seu perfil em cada plataforma.
           </p>
         </motion.div>

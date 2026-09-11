@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion'
 import { educationItems } from '../data/education'
 import ScrollArrow from './ScrollArrow'
+import InstitutionLogo from './InstitutionLogo'
 
 export default function Education() {
   return (
     <section
       id="education"
-      className="py-20 px-6 bg-[#FDFBF7] dark:bg-dark-canvas"
+      className="py-20 px-6 bg-[#F9FBF8] dark:bg-dark-canvas"
       aria-labelledby="education-heading"
     >
       <div className="max-w-6xl mx-auto">
@@ -39,25 +40,36 @@ export default function Education() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <h3 className="font-semibold text-lg text-[#262322] dark:text-dark-text-primary mb-1">
-                {item.title}
-              </h3>
-              {item.institutionUrl ? (
-                <a
-                  href={item.institutionUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-accent-primary dark:text-dark-accent-primary font-medium text-sm mb-1 hover:text-accent-hover dark:hover:text-dark-accent-hover transition-colors inline-block"
-                >
-                  {item.institution} →
-                </a>
-              ) : (
-                <p className="text-accent-primary dark:text-dark-accent-primary font-medium text-sm mb-1">{item.institution}</p>
-              )}
-              <p className="text-[#262322]/70 dark:text-dark-text-secondary text-sm">
-                {item.period}
-                {item.detail && ` · ${item.detail}`}
-              </p>
+              <div className="flex items-start gap-4">
+                {item.logo && (
+                  <InstitutionLogo
+                    src={item.logo}
+                    institution={item.institution}
+                    backdrop={item.logoBackdrop}
+                  />
+                )}
+                <div>
+                  <h3 className="font-semibold text-lg text-[#17161C] dark:text-dark-text-primary mb-1">
+                    {item.title}
+                  </h3>
+                  {item.institutionUrl ? (
+                    <a
+                      href={item.institutionUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent-primary dark:text-dark-accent-primary font-medium text-sm mb-1 hover:text-accent-hover dark:hover:text-dark-accent-hover transition-colors inline-block"
+                    >
+                      {item.institution} →
+                    </a>
+                  ) : (
+                    <p className="text-accent-primary dark:text-dark-accent-primary font-medium text-sm mb-1">{item.institution}</p>
+                  )}
+                  <p className="text-[#17161C]/70 dark:text-dark-text-secondary text-sm">
+                    {item.period}
+                    {item.detail && ` · ${item.detail}`}
+                  </p>
+                </div>
+              </div>
             </motion.article>
           ))}
         </div>

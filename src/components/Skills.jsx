@@ -6,7 +6,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="py-20 px-6 bg-[#FDFBF7] dark:bg-dark-canvas"
+      className="py-20 px-6 bg-[#F9FBF8] dark:bg-dark-canvas"
       aria-labelledby="skills-heading"
     >
       <div className="max-w-6xl mx-auto">
@@ -44,7 +44,7 @@ export default function Skills() {
                 {group.items.map((skill) => (
                   <li
                     key={skill}
-                    className="px-3 py-1.5 rounded-md bg-[#EFE9E1] dark:bg-dark-border-medium text-[#262322] dark:text-dark-text-primary text-sm border border-[#EFE9E1] dark:border-dark-border-medium hover:border-accent-primary dark:hover:border-dark-accent-primary/50 transition-colors"
+                    className="px-3 py-1.5 rounded-md bg-[#E5DBCF] dark:bg-dark-border-medium text-[#17161C] dark:text-dark-text-primary text-sm border border-[#E5DBCF] dark:border-dark-border-medium hover:border-accent-primary dark:hover:border-dark-accent-primary/50 transition-colors"
                   >
                     {skill}
                   </li>
