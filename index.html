@@ -7,26 +7,57 @@
     <meta name="description" content="Walmir Fernandes Junior — Engenharia de Dados e de Software. Graduando em Sistemas de Informação na USP, estagiário no Itaú Unibanco e ex-BTG Pactual. Python, AWS (Glue, Athena, Lambda, S3), FastAPI, React e IA aplicada." />
     <title>Walmir Fernandes Junior | Engenharia de Dados &amp; Software</title>
     <meta name="author" content="Walmir Fernandes Junior" />
+    <meta name="theme-color" content="#dce0d9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#31081f" media="(prefers-color-scheme: dark)" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Walmir Fernandes Junior | Engenharia de Dados &amp; Software" />
     <meta property="og:description" content="Engenheiro de dados e software em formação. Pipelines de grande volumetria na AWS, automações fullstack e IA aplicada. Itaú Unibanco, BTG Pactual e USP." />
     <meta property="og:locale" content="pt_BR" />
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta name="twitter:card" content="summary" />
+    <!--
+      Sem canonical, og:url e og:image enquanto o domínio de publicação não for
+      confirmado: uma URL inventada é pior do que a ausência da tag.
+      twitter:card é "summary" justamente por não haver imagem social real.
+    -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <script>
-      // Aplicar tema escuro antes do React carregar para evitar flash
-      (function() {
-        const saved = localStorage.getItem('theme');
-        if (!saved || saved === 'dark') {
-          document.documentElement.classList.add('dark');
+      /*
+       * Tema e idioma antes da primeira pintura, para não haver flash.
+       * Este script e o ThemeContext precisam concordar no padrão (claro).
+       * Envolto em try/catch: em modo privado ou com armazenamento bloqueado,
+       * só ler localStorage já lança — e uma exceção aqui deixaria a página em
+       * branco. Sem armazenamento, valem os padrões (escuro, português).
+       */
+      (function () {
+        var theme = 'light';
+        var lang = null;
+        try {
+          var savedTheme = localStorage.getItem('theme');
+          if (savedTheme === 'dark') theme = 'dark';
+          var savedLang = localStorage.getItem('lang');
+          if (savedLang === 'pt' || savedLang === 'en') lang = savedLang;
+        } catch (error) {
+          /* armazenamento indisponível: seguir com os padrões */
         }
+        if (theme === 'dark') document.documentElement.classList.add('dark');
+        document.documentElement.lang = lang === 'en' ? 'en' : 'pt-BR';
       })();
     </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <p style="font-family: system-ui, sans-serif; margin: 2rem; line-height: 1.6;">
+        Este portfólio é uma aplicação React e precisa de JavaScript para exibir o conteúdo.
+        Para falar comigo diretamente:
+        <a href="mailto:walmir.jr.2004@usp.br">walmir.jr.2004@usp.br</a>.
+        O currículo em PDF está disponível em
+        <a href="/curriculo-walmir-fernandes-junior.pdf">/curriculo-walmir-fernandes-junior.pdf</a>.
+      </p>
+    </noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
