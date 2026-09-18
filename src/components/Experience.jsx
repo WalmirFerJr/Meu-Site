@@ -1,147 +1,109 @@
-import { motion } from 'framer-motion'
-import { experiences, experienceHighlights } from '../data/experience'
-import ScrollArrow from './ScrollArrow'
-import InstitutionLogo from './InstitutionLogo'
+import { experiences } from '../data/experience'
+import { useLanguage, pick } from '../contexts/LanguageContext'
+import { useStringsFor } from '../i18n/strings'
+import Section from './ui/Section'
+import Reveal from './ui/Reveal'
+import InstitutionLogo from './ui/InstitutionLogo'
 
-function HighlightCard({ item, index }) {
-  return (
-    <motion.div
-      className="flex-1 min-w-[150px] p-5 rounded-xl card-glass text-center"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-    >
-      <p className="font-mono text-2xl md:text-3xl font-semibold text-accent-primary dark:text-dark-accent-primary">
-        {item.value}
-      </p>
-      <p className="text-[#17161C]/70 dark:text-dark-text-secondary text-xs mt-1 leading-snug">{item.label}</p>
-    </motion.div>
-  )
-}
+function ExperienceItem({ experience, strings, lang, index }) {
+  const points = pick(experience.points, lang)
+  const isAcademic = experience.kind === 'academic'
 
-function ExperienceCard({ experience, index }) {
   return (
-    <motion.article
-      className="relative pl-10 md:pl-14 pb-12 last:pb-0"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.55, delay: index * 0.1 }}
-    >
-      {/* Marcador da linha do tempo */}
-      <span
-        className="absolute left-[10px] md:left-[14px] top-1.5 -translate-x-1/2 w-3.5 h-3.5 rounded-full bg-accent-primary dark:bg-dark-accent-primary ring-4 ring-[#F9FBF8] dark:ring-dark-canvas"
-        aria-hidden
-      >
+    <Reveal as="article" delay={Math.min(index * 0.05, 0.15)} className="grid gap-6 py-12 first:pt-0 md:grid-cols-12 md:gap-10">
+      {/* Datas em coluna lateral, como a timeline da referência. */}
+      <div className="md:col-span-3">
+        <p className="font-sans text-meta font-semibold text-[var(--text-secondary)]">
+          {pick(experience.period, lang)}
+        </p>
         {experience.current && (
-          <span className="absolute inset-0 rounded-full bg-accent-primary dark:bg-dark-accent-primary animate-ping opacity-60" />
+          /* Estado por texto, não só por cor. */
+          <p className="mt-2 inline-block rounded-full border border-[var(--border-control)] px-2.5 py-0.5 font-sans text-[0.8125rem] font-bold uppercase tracking-wider text-[var(--text)]">
+            {strings.experience.current}
+          </p>
         )}
-      </span>
+        {isAcademic && (
+          <p className="mt-2 text-meta text-[var(--text-secondary)]">{strings.experience.academic}</p>
+        )}
+      </div>
 
-      <div className="p-6 rounded-xl card-glass transition-all hover:border-accent-primary dark:hover:border-dark-accent-primary/40 hover:shadow-soft">
-        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mb-1">
-          <h3 className="font-semibold text-lg text-[#17161C] dark:text-dark-text-primary">{experience.role}</h3>
-          <span className="font-mono text-xs text-[#17161C]/60 dark:text-dark-text-secondary whitespace-nowrap">
-            {experience.period}
-          </span>
-        </div>
-
-        <div className="mt-3 mb-2 flex flex-wrap items-center gap-3">
+      <div className="md:col-span-9">
+        <div className="flex flex-wrap items-center gap-4">
           <InstitutionLogo
             src={experience.logo}
-            institution={experience.company}
+            institution={experience.logoInstitution ?? experience.company}
             backdrop={experience.logoBackdrop}
-            compact
+            size="sm"
+            /* No DASI a logo é da USP, não do diretório: precisa de nome próprio. */
+            decorative={!experience.logoInstitution}
           />
-          <p className="text-accent-primary dark:text-dark-accent-primary font-medium text-sm">
-            {experience.company}
-            {experience.current && (
-              <span className="ml-2 align-middle inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider font-semibold bg-accent-primary/10 dark:bg-dark-accent-primary/15 text-accent-primary dark:text-dark-accent-primary border border-accent-primary/20 dark:border-dark-accent-primary/25">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent-primary dark:bg-dark-accent-primary" aria-hidden />
-                Atual
-              </span>
-            )}
-          </p>
+          <div>
+            <h3 className="font-display text-card">{pick(experience.role, lang)}</h3>
+            <p className="mt-1 font-sans text-meta font-semibold text-[var(--text)]">
+              {experience.company}
+            </p>
+          </div>
         </div>
 
         {experience.area && (
-          <p className="text-[#17161C]/60 dark:text-dark-text-secondary text-xs mb-4">{experience.area}</p>
+          <p className="mt-3 font-sans text-meta text-[var(--text-secondary)]">
+            {pick(experience.area, lang)}
+          </p>
         )}
 
-        <ul className="space-y-2.5 text-[#17161C]/80 dark:text-dark-text-secondary text-sm leading-relaxed" role="list">
-          {experience.points.map((point, i) => (
-            <li key={i} className="flex gap-3">
-              <span
-                className="mt-[7px] shrink-0 w-1.5 h-1.5 rounded-full bg-accent-primary/60 dark:bg-dark-accent-primary/60"
-                aria-hidden
-              />
+        <ul className="mt-6 space-y-3 text-body text-[var(--text)]" role="list">
+          {points.map((point, index) => (
+            <li key={index} className="flex gap-3">
+              <span className="mt-[0.7em] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" aria-hidden="true" />
               <span>{point}</span>
             </li>
           ))}
         </ul>
 
-        <ul className="flex flex-wrap gap-2 mt-5 pt-4 border-t border-[#E5DBCF] dark:border-dark-border-medium" role="list">
-          {experience.stack.map((tech) => (
-            <li
-              key={tech}
-              className="px-2.5 py-1 rounded-md font-mono text-xs bg-[#E5DBCF] dark:bg-dark-border-medium text-[#17161C] dark:text-dark-text-primary border border-[#E5DBCF] dark:border-dark-border-medium"
-            >
-              {tech}
-            </li>
-          ))}
-        </ul>
+        {/* Resultados junto da experiência que os originou. */}
+        {experience.results.length > 0 && (
+          <div className="mt-6">
+            <h4 className="eyebrow mb-3">{strings.experience.resultsLabel}</h4>
+            <ul className="grid gap-4 sm:grid-cols-2" role="list">
+              {experience.results.map((result) => (
+                <li key={result.value} className="panel px-4 py-3">
+                  <p className="font-display text-card text-[var(--heading)]">{result.value}</p>
+                  <p className="mt-1 text-meta text-[var(--text-secondary)]">{pick(result.label, lang)}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <div className="mt-6">
+          <h4 className="eyebrow mb-2">{strings.experience.stackLabel}</h4>
+          <p className="font-sans text-meta text-[var(--text-secondary)]">
+            {[...new Set([...experience.focus, ...experience.stack])].join(' · ')}
+          </p>
+        </div>
       </div>
-    </motion.article>
+    </Reveal>
   )
 }
 
 export default function Experience() {
+  const { lang } = useLanguage()
+  const t = useStringsFor(lang)
+
   return (
-    <section
-      id="experience"
-      className="py-20 px-6 bg-[#F9FBF8] dark:bg-dark-canvas"
-      aria-labelledby="experience-heading"
-    >
-      <div className="max-w-4xl mx-auto">
-        <motion.h2
-          id="experience-heading"
-          className="section-title"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          Experiência profissional
-        </motion.h2>
-        <motion.p
-          className="section-subtitle mb-10"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
-          Engenharia de dados e de software aplicadas ao mercado financeiro.
-        </motion.p>
-
-        <div className="flex flex-wrap gap-4 mb-14">
-          {experienceHighlights.map((item, index) => (
-            <HighlightCard key={item.label} item={item} index={index} />
-          ))}
-        </div>
-
-        {/* Linha do tempo */}
-        <div className="relative">
-          <span
-            className="absolute left-[10px] md:left-[14px] top-2 bottom-2 w-px bg-gradient-to-b from-accent-primary/50 via-[#E5DBCF] to-transparent dark:from-dark-accent-primary/50 dark:via-dark-border-soft dark:to-transparent"
-            aria-hidden
+    /* Faixa escura: a pausa visual do site, em carvão neutro. */
+    <Section id="experience" index="02" tone="invert" eyebrow={t.experience.eyebrow} title={t.experience.title}>
+      <div className="divide-y divide-[var(--divider-decorative)]">
+        {experiences.map((experience, index) => (
+          <ExperienceItem
+            key={experience.id}
+            experience={experience}
+            strings={t}
+            lang={lang}
+            index={index}
           />
-          {experiences.map((experience, index) => (
-            <ExperienceCard key={experience.id} experience={experience} index={index} />
-          ))}
-        </div>
+        ))}
       </div>
-      <ScrollArrow targetId="education" />
-    </section>
+    </Section>
   )
 }

@@ -1,81 +1,60 @@
-import { motion } from 'framer-motion'
 import { activities } from '../data/activities'
-import ScrollArrow from './ScrollArrow'
-import ImageWithLED from './ImageWithLED'
-
-function ActivityCard({ activity, index }) {
-  return (
-    <motion.article
-      key={activity.id}
-      className="p-6 rounded-xl card-glass hover:border-accent-primary dark:hover:border-dark-accent-primary/40 transition-all group hover:shadow-soft"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-    >
-      {activity.image && (
-        <div className="mb-4">
-          <ImageWithLED src={activity.image} alt={activity.title} className="w-full h-48" rounded="lg" />
-        </div>
-      )}
-      <h3 className="font-semibold text-lg text-[#17161C] dark:text-dark-text-primary mb-2">
-        {activity.url ? (
-          <a
-            href={activity.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-accent-primary dark:hover:text-dark-accent-primary transition-colors"
-          >
-            {activity.title} →
-          </a>
-        ) : (
-          activity.title
-        )}
-      </h3>
-      <p className="text-accent-primary dark:text-dark-accent-primary text-sm font-medium mb-4">{activity.period}</p>
-      <ul className="space-y-2 text-[#17161C]/70 dark:text-dark-text-secondary text-sm leading-relaxed list-disc list-inside" role="list">
-        {activity.points.map((point, i) => (
-          <li key={i}>{point}</li>
-        ))}
-      </ul>
-    </motion.article>
-  )
-}
+import { useLanguage, pick } from '../contexts/LanguageContext'
+import { useStringsFor } from '../i18n/strings'
+import Section from './ui/Section'
+import Reveal from './ui/Reveal'
+import Figure from './ui/Figure'
+import ExternalLink from './ui/ExternalLink'
 
 export default function Activities() {
+  const { lang } = useLanguage()
+  const t = useStringsFor(lang)
+
   return (
-    <section
+    <Section
       id="activities"
-      className="py-20 px-6 bg-[#F9FBF8] dark:bg-dark-canvas"
-      aria-labelledby="activities-heading"
+      index="06"
+      eyebrow={t.activities.eyebrow}
+      title={t.activities.title}
+      lede={t.activities.volunteerNote}
     >
-      <div className="max-w-6xl mx-auto">
-        <motion.h2
-          id="activities-heading"
-          className="section-title"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          Atividades extracurriculares
-        </motion.h2>
-        <motion.p
-          className="section-subtitle mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
-          Liderança, impacto social e organização de eventos.
-        </motion.p>
-        <div className="grid md:grid-cols-2 gap-8">
-          {activities.map((activity, index) => (
-            <ActivityCard key={activity.id} activity={activity} index={index} />
-          ))}
-        </div>
+      <div className="grid gap-12 md:grid-cols-2 md:gap-10">
+        {activities.map((activity, index) => (
+          <Reveal key={activity.id} as="article" delay={Math.min(index * 0.06, 0.12)} className="flex flex-col">
+            {/* Cada imagem mantém a razão do arquivo: o retrato vertical não vira faixa. */}
+            <Figure
+              src={activity.image}
+              alt={pick(activity.imageAlt, lang)}
+              width={activity.imageWidth}
+              height={activity.imageHeight}
+              className="mb-6"
+            />
+            <h3 className="font-display text-card">{pick(activity.title, lang)}</h3>
+            <p className="mt-2 font-sans text-meta font-semibold text-[var(--text-secondary)]">
+              {pick(activity.period, lang)}
+            </p>
+            <ul className="mt-4 space-y-2 text-body text-[var(--text)]" role="list">
+              {pick(activity.points, lang).map((point, index) => (
+                <li key={index} className="flex gap-3">
+                  <span className="mt-[0.7em] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" aria-hidden="true" />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+            {activity.url && (
+              <p className="mt-5">
+                <ExternalLink
+                  href={activity.url}
+                  className="link-inline link-action font-sans text-meta font-semibold"
+                  accessibleName={pick(activity.urlLabel, lang)}
+                >
+                  {pick(activity.urlLabel, lang)}
+                </ExternalLink>
+              </p>
+            )}
+          </Reveal>
+        ))}
       </div>
-      <ScrollArrow targetId="certifications" />
-    </section>
+    </Section>
   )
 }
