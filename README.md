@@ -14,10 +14,11 @@ npm run preview  # serve o resultado do build
 
 Esses três são os únicos scripts existentes. Não há lint nem testes configurados.
 
-> **Atenção ao `dist/`.** O diretório está versionado no Git e não foi encontrada
-> nenhuma configuração de CI ou deploy no repositório. Enquanto a forma de publicação
-> não estiver confirmada, `npm run build` sem `--outDir` **sobrescreve** esses arquivos
-> versionados. Para apenas validar o build sem tocar neles:
+> **Publicação.** A Vercel está integrada ao GitHub: alterações em `main` geram
+> deploys de produção nos projetos `walmir-fernandes` e `walmirfernandes`; outras
+> branches geram prévias. A integração foi confirmada nos registros de deploy do
+> GitHub. O diretório `dist/` também está versionado e deve acompanhar a versão
+> publicada, usando `npm run build`. Para apenas validar sem alterar esses arquivos:
 >
 > ```bash
 > npm run build -- --outDir /tmp/portfolio-build --emptyOutDir
@@ -118,8 +119,9 @@ O que precisa continuar valendo ao editar:
 - Dois certificados (Git/GitHub e Python) apontam para a **mesma URL** no cadastro.
   Os dois registros foram preservados; falta o link correto do de Python.
 - "4º semestre" é o valor que estava no código e não foi recalculado por calendário.
-- Domínio e pipeline de publicação não confirmados: por isso não há `canonical`,
-  `og:url` nem imagem social — uma URL inventada seria pior que a ausência da tag.
+- A publicação pela Vercel está confirmada. Como há dois projetos de produção e
+  o domínio principal ainda não foi escolhido, não há `canonical`, `og:url` nem
+  imagem social.
 - `framer-motion` continua no `package.json`, mas hoje só é importado por
   `src/components/DSA.jsx`, que não é renderizado. Não entra no bundle. As animações
   do site usam IntersectionObserver próprio (`src/components/ui/Reveal.jsx`), com rede
