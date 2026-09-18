@@ -1,118 +1,126 @@
-import { motion } from 'framer-motion'
-import ScrollArrow from './ScrollArrow'
-import ResumeButton from './ResumeButton'
-import InstitutionLogo from './InstitutionLogo'
+import { affiliations, profile } from '../data/profile'
+import { useLanguage, pick } from '../contexts/LanguageContext'
+import { useStringsFor } from '../i18n/strings'
+import InstitutionLogo from './ui/InstitutionLogo'
+import ResumeButton from './ui/ResumeButton'
+import { RevealNow } from './ui/Reveal'
 
-const roles = ['Engenharia de Dados', 'Engenharia de Software', 'AWS & Cloud', 'IA Aplicada']
-const companies = [
-  { name: 'Itaú Unibanco', logo: '/images/itau.svg', backdrop: 'light' },
-  { name: 'BTG Pactual', logo: '/images/btg-pactual.png', backdrop: 'dark' },
-  { name: 'USP', logo: '/images/usp.jpg', backdrop: 'light' },
-]
-
+/**
+ * Abertura editorial: texto à esquerda, retrato à direita no desktop; no celular
+ * texto e ações vêm antes da foto (ordem do DOM = ordem de leitura).
+ *
+ * A altura é guiada pelo conteúdo, não por `min-h-screen`. A entrada é escalonada
+ * em cascata curta — e desligada por completo sob movimento reduzido.
+ */
 export default function Hero() {
+  const { lang } = useLanguage()
+  const t = useStringsFor(lang)
+
   return (
-    <section
-      className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-20 pb-16 bg-[#F9FBF8] dark:bg-dark-canvas overflow-hidden"
-      aria-labelledby="hero-heading"
-    >
-      {/* Brilho ambiente sutil atrás do título */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-60 dark:opacity-40"
-        style={{
-          background:
-            'radial-gradient(60% 45% at 50% 30%, rgba(60, 50, 51, 0.12) 0%, rgba(60, 50, 51, 0) 70%)',
-        }}
-        aria-hidden
-      />
+    <section id="top" className="relative overflow-hidden pb-section pt-12 md:pt-20" aria-labelledby="hero-heading">
+      <div className="shell grid gap-14 lg:grid-cols-12 lg:items-center lg:gap-16">
+        <div className="lg:col-span-7">
+          <RevealNow y={12}>
+            <p className="eyebrow flex items-center gap-3">
+              <span className="h-px w-8 bg-[var(--accent)]" aria-hidden="true" />
+              {t.hero.eyebrow}
+            </p>
+          </RevealNow>
 
-      <div className="relative max-w-4xl mx-auto text-center flex-1 flex flex-col justify-center">
-        <motion.div
-          className="flex flex-wrap justify-center gap-2 mb-8"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-        >
-          {roles.map((role) => (
-            <span
-              key={role}
-              className="px-3 py-1 rounded-full font-mono text-[11px] tracking-wide uppercase border border-accent-primary/25 dark:border-dark-accent-primary/25 bg-accent-primary/5 dark:bg-dark-accent-primary/10 text-accent-primary dark:text-dark-accent-primary"
-            >
-              {role}
-            </span>
-          ))}
-        </motion.div>
+          {/* Um único h1: nome e posicionamento juntos. */}
+          <h1 id="hero-heading" className="mt-6 text-hero">
+            <RevealNow as="span" delay={0.06} className="block">
+              {t.hero.name}
+            </RevealNow>
+            <RevealNow as="span" delay={0.14} className="mt-5 block">
+              <span className="block font-sans text-[clamp(1.125rem,0.85rem+1.1vw,1.75rem)] font-semibold leading-snug text-[var(--accent)]">
+                {t.hero.tagline}
+              </span>
+            </RevealNow>
+          </h1>
 
-        <motion.h1
-          id="hero-heading"
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#17161C] dark:text-dark-text-primary leading-tight mb-6"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-        >
-          Olá, sou{' '}
-          <span className="bg-gradient-to-r from-accent-primary via-accent-hover to-accent-primary dark:from-dark-accent-primary dark:via-dark-accent-hover dark:to-dark-accent-primary bg-clip-text text-transparent">
-            Walmir Fernandes
-          </span>
-        </motion.h1>
+          <RevealNow delay={0.2}>
+            <p className="lede mt-7">{t.hero.intro}</p>
+          </RevealNow>
 
-        <motion.p
-          className="text-[#17161C]/70 dark:text-dark-text-secondary text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-        >
-          Engenheiro de dados e software em formação, graduando em Sistemas de Informação pela{' '}
-          <strong className="text-[#17161C] dark:text-dark-text-primary">USP</strong>.
-          <br />
-          Construo pipelines de grande volumetria e sistemas backend escaláveis na{' '}
-          <strong className="text-[#17161C] dark:text-dark-text-primary">AWS</strong>.
-        </motion.p>
+          <RevealNow delay={0.27}>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <a href="#experience" className="btn btn-primary py-3">
+                {t.actions.seeExperience}
+              </a>
+              <ResumeButton variant="secondary" />
+              <a href="#contact" className="btn btn-secondary py-3">
+                {t.actions.contact}
+              </a>
+            </div>
+          </RevealNow>
 
-        <motion.div
-          className="flex flex-wrap gap-4 justify-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
-        >
-          <a href="#experience" className="btn-primary">
-            Ver experiência
-          </a>
-          <ResumeButton variant="secondary" />
-          <a href="#contact" className="btn-secondary">
-            Entrar em contato
-          </a>
-        </motion.div>
+          <RevealNow delay={0.34}>
+            <div className="mt-12">
+              <h2 className="eyebrow mb-3">{t.hero.specialtiesLabel}</h2>
+              <p className="font-sans text-meta font-semibold text-[var(--text-secondary)]">
+                {t.hero.specialties.join('  ·  ')}
+              </p>
+            </div>
+          </RevealNow>
+        </div>
 
-        <motion.div
-          className="mt-14"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
-        >
-          <p className="text-[10px] uppercase tracking-[0.2em] text-[#17161C]/45 dark:text-dark-text-secondary/70 mb-3">
-            Experiência em
-          </p>
-          <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2" role="list">
-            {companies.map((company) => (
-              <li
-                key={company.name}
-                className="flex flex-col items-center gap-2 font-medium text-sm md:text-base text-[#17161C]/55 dark:text-dark-text-secondary/80"
-              >
+        <div className="lg:col-span-5">
+          <RevealNow delay={0.12} y={24}>
+            {/* Bloco vinho deslocado: a colagem editorial da referência. Decorativo,
+                dentro de um wrapper com espaço já reservado. */}
+            <div className="relative mx-auto max-w-sm lg:max-w-none">
+              {/* Bloco de acento deslocado — o único uso do vinho em área
+                  preenchida. Decorativo, atrás da foto, e some no celular. */}
+              <div
+                className="pointer-events-none absolute hidden rounded-sm bg-[var(--accent-block-bg)] sm:block"
+                style={{ inset: '2.5rem -1.75rem -1.75rem 2.5rem' }}
+                aria-hidden="true"
+              />
+              <img
+                src={profile.photo.src}
+                alt={pick(profile.photo.alt, lang)}
+                width={profile.photo.width}
+                height={profile.photo.height}
+                loading="eager"
+                decoding="sync"
+                className="relative w-full rounded-sm object-cover"
+              />
+            </div>
+            <p className="mt-6 flex items-center gap-3 font-sans text-meta text-[var(--text-secondary)] lg:mt-8">
+              <span className="h-px w-6 bg-[var(--divider-decorative)]" aria-hidden="true" />
+              {pick(profile.location, lang)}
+            </p>
+          </RevealNow>
+        </div>
+      </div>
+
+      {/* Faixa institucional: vínculo explícito de cada logo, não "clientes". */}
+      <div className="shell mt-20">
+        <RevealNow delay={0.42}>
+          <h2 className="eyebrow mb-6 flex items-center gap-4">
+            {t.hero.trackLabel}
+            <span className="h-px flex-1 bg-[var(--divider-decorative)]" aria-hidden="true" />
+          </h2>
+          <ul className="flex flex-wrap items-center gap-x-12 gap-y-7" role="list">
+            {affiliations.map((item) => (
+              <li key={item.id} className="flex items-center gap-4">
                 <InstitutionLogo
-                  src={company.logo}
-                  institution={company.name}
-                  backdrop={company.backdrop}
-                  compact
+                  src={item.logo}
+                  institution={item.name}
+                  backdrop={item.backdrop}
+                  size="sm"
+                  decorative
                 />
-                <span>{company.name}</span>
+                <span className="font-sans text-meta">
+                  <span className="block font-semibold text-[var(--text)]">{item.name}</span>
+                  <span className="block text-[var(--text-secondary)]">{pick(item.relation, lang)}</span>
+                </span>
               </li>
             ))}
           </ul>
-        </motion.div>
+        </RevealNow>
       </div>
-
-      <ScrollArrow targetId="about" />
     </section>
   )
 }

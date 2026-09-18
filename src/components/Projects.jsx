@@ -1,98 +1,75 @@
-import { motion } from 'framer-motion'
 import { projects } from '../data/projects'
-import ScrollArrow from './ScrollArrow'
+import { useLanguage, pick } from '../contexts/LanguageContext'
+import { useStringsFor } from '../i18n/strings'
+import Section from './ui/Section'
+import Reveal from './ui/Reveal'
+import ExternalLink from './ui/ExternalLink'
 
-function ProjectCard({ project, index }) {
-  const hasDemo = Boolean(project.demoUrl)
+function ProjectArticle({ project, index, strings, lang }) {
+  const number = String(index + 1).padStart(2, '0')
+  const title = pick(project.title, lang)
 
   return (
-    <motion.article
-      className="group p-6 rounded-2xl card-glass hover:border-accent-primary dark:hover:border-dark-accent-primary/40 transition-all flex flex-col hover:shadow-soft"
+    <Reveal
+      as="article"
+      delay={Math.min(index * 0.05, 0.15)}
+      className="group grid gap-4 py-12 md:grid-cols-12 md:gap-8"
       aria-labelledby={`project-${project.id}-title`}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <h3
-        id={`project-${project.id}-title`}
-        className="font-semibold text-xl text-[#17161C] dark:text-dark-text-primary mb-3 group-hover:text-accent-primary dark:group-hover:text-dark-accent-primary transition-colors"
+      <p
+        className="font-display text-[clamp(2rem,1.4rem+1.6vw,3rem)] leading-none text-[var(--text-secondary)] md:col-span-2"
+        aria-hidden="true"
       >
-        {project.title}
-      </h3>
-      <p className="text-[#17161C]/70 dark:text-dark-text-secondary text-sm leading-relaxed mb-4 flex-1">
-        {project.description}
+        {number}
       </p>
-      <div className="flex flex-wrap gap-2 mb-4">
-        {project.tech.map((t) => (
-          <span
-            key={t}
-            className="px-2.5 py-1 rounded bg-accent-primary/10 dark:bg-dark-accent-primary/20 text-accent-primary dark:text-dark-accent-primary text-xs font-medium border border-accent-primary/20 dark:border-dark-accent-primary/30 font-mono"
-          >
-            {t}
-          </span>
-        ))}
-      </div>
-      <div className="flex flex-wrap gap-3 pt-2 border-t border-[#E5DBCF] dark:border-dark-border-medium">
-        {hasDemo && (
-          <a
-            href={project.demoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm bg-gradient-to-r from-accent-primary to-accent-hover dark:from-dark-accent-primary dark:to-dark-accent-hover text-[#F9FBF8] dark:text-dark-canvas hover:brightness-110 transition-all"
-          >
-            <span aria-hidden>▶</span>
-            Demo
-          </a>
-        )}
-        <a
-          href={project.repo}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm border border-[#E5DBCF] dark:border-dark-border-medium text-[#17161C] dark:text-dark-text-primary hover:border-accent-primary dark:hover:border-dark-accent-primary hover:text-accent-primary dark:hover:text-dark-accent-primary transition-colors"
+
+      <div className="md:col-span-10">
+        <h3
+          id={`project-${project.id}-title`}
+          className="font-display text-card transition-colors duration-normal group-hover:text-[var(--accent)]"
         >
-          <span aria-hidden>{"</>"}</span>
-          Repo
-        </a>
+          {title}
+        </h3>
+        <p className="mt-3 max-w-reading text-body text-[var(--text)]">
+          {pick(project.description, lang)}
+        </p>
+
+        <div className="mt-5">
+          <h4 className="eyebrow mb-2">{strings.projects.techLabel}</h4>
+          <p className="font-sans text-meta text-[var(--text-secondary)]">{project.tech.join(' · ')}</p>
+        </div>
+
+        <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2">
+          <ExternalLink
+            href={project.repo}
+            className="link-inline link-action font-sans text-meta font-semibold"
+            accessibleName={pick(project.repoLabel, lang)}
+          >
+            {pick(project.repoLabel, lang)}
+          </ExternalLink>
+          {/* demoUrl é null em todos: nenhuma ação de demo é inventada. */}
+          {!project.demoUrl && (
+            <span className="font-sans text-meta text-[var(--text-secondary)]">
+              {strings.projects.noDemo}
+            </span>
+          )}
+        </div>
       </div>
-    </motion.article>
+    </Reveal>
   )
 }
 
 export default function Projects() {
+  const { lang } = useLanguage()
+  const t = useStringsFor(lang)
+
   return (
-    <section
-      id="projects"
-      className="py-20 px-6 bg-[#F9FBF8] dark:bg-dark-canvas"
-      aria-labelledby="projects-heading"
-    >
-      <div className="max-w-6xl mx-auto">
-        <motion.h2
-          id="projects-heading"
-          className="section-title"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          Projetos em destaque
-        </motion.h2>
-        <motion.p
-          className="section-subtitle mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
-          Alguns dos meus projetos que mais me orgulho.
-        </motion.p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
-          ))}
-        </div>
+    <Section id="projects" index="03" eyebrow={t.projects.eyebrow} title={t.projects.title}>
+      <div className="divide-y divide-[var(--divider-decorative)]">
+        {projects.map((project, index) => (
+          <ProjectArticle key={project.id} project={project} index={index} strings={t} lang={lang} />
+        ))}
       </div>
-      <ScrollArrow targetId="activities" />
-    </section>
+    </Section>
   )
 }

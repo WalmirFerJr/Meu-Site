@@ -20,3 +20,10 @@ node_modules
 *.njsproj
 *.sln
 *.sw?
+
+# Kit de instruções da refatoração.
+# Fica fora do versionamento porque este repositório é público e
+# instrucoes-refatoracao/referencias/design-fornecido.png é o currículo de outra
+# pessoa real — com foto, e-mail, telefone e data de nascimento —, marcado como
+# publicUse: false no manifesto do próprio kit. É material de trabalho local.
+instrucoes-refatoracao/

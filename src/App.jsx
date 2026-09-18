@@ -1,66 +1,68 @@
-import { lazy, Suspense } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
+import About from './components/About'
+import Experience from './components/Experience'
+import Projects from './components/Projects'
+import Education from './components/Education'
+import Skills from './components/Skills'
+import Activities from './components/Activities'
+import Certifications from './components/Certifications'
+import Contact from './components/Contact'
 import Footer from './components/Footer'
-import IntroComponent from './components/IntroComponent'
-import { useSplashScreen } from './hooks/useSplashScreen'
+import { useLanguage } from './contexts/LanguageContext'
+import { useStringsFor } from './i18n/strings'
 
-const About = lazy(() => import('./components/About'))
-const Experience = lazy(() => import('./components/Experience'))
-const Education = lazy(() => import('./components/Education'))
-const Skills = lazy(() => import('./components/Skills'))
-const Projects = lazy(() => import('./components/Projects'))
-const Activities = lazy(() => import('./components/Activities'))
-const Certifications = lazy(() => import('./components/Certifications'))
-const Contact = lazy(() => import('./components/Contact'))
+/**
+ * Sem intro, sem splash e sem temporizador: header, hero e ações aparecem na
+ * primeira renderização útil.
+ *
+ * As seções também deixaram de ser `lazy`. São oito componentes pequenos de um
+ * site de página única, e o carregamento adiado fazia links diretos como
+ * /#contact dependerem de um chunk que ainda não chegou. Imports diretos tornam
+ * as oito âncoras alcançáveis desde a primeira pintura.
+ */
+export default function App() {
+  const { lang } = useLanguage()
+  const t = useStringsFor(lang)
 
-function SectionFallback() {
-  return <div className="min-h-[50vh]" aria-hidden />
-}
-
-function App() {
-  const [isSplashVisible, hideSplash, isAnimating] = useSplashScreen()
+  /**
+   * Entrada direta por hash (/#contact, recarga, link compartilhado).
+   *
+   * O HTML servido tem o root vazio, então o navegador procura a âncora antes de
+   * o React montar, não encontra e deixa a página no topo. Aqui a rolagem é
+   * refeita uma vez, depois da primeira montagem — não é espera fixa: as seções
+   * são importadas diretamente, então o alvo já existe neste ponto.
+   *
+   * O salto é `instant` de propósito: quem abre um link direto espera já estar
+   * na seção, não assistir a página percorrer tudo até lá — e uma animação longa
+   * no carregamento ainda pode ser interrompida por imagens que chegam depois.
+   */
+  useEffect(() => {
+    const id = window.location.hash.slice(1)
+    if (!id) return
+    const target = document.getElementById(id)
+    if (target) target.scrollIntoView({ behavior: 'instant', block: 'start' })
+  }, [])
 
   return (
-    <div className="min-h-screen">
-      <AnimatePresence mode="wait">
-        {isSplashVisible ? (
-          <IntroComponent
-            key="splash"
-            onComplete={() => {
-              if (isAnimating) {
-                hideSplash()
-              }
-            }}
-          />
-        ) : (
-          <motion.div
-            key="main"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.2, ease: 'easeOut', delay: 0.25 }}
-          >
-            <Navbar />
-            <main>
-              <Hero />
-              <Suspense fallback={<SectionFallback />}>
-                <About />
-                <Experience />
-                <Education />
-                <Projects />
-                <Activities />
-                <Certifications />
-                <Skills />
-                <Contact />
-              </Suspense>
-            </main>
-            <Footer />
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+    <>
+      <a href="#main" className="skip-link">
+        {t.nav.skipToContent}
+      </a>
+      <Navbar />
+      <main id="main">
+        <Hero />
+        <About />
+        <Experience />
+        <Projects />
+        <Education />
+        <Skills />
+        <Activities />
+        <Certifications />
+        <Contact />
+      </main>
+      <Footer />
+    </>
   )
 }
-
-export default App

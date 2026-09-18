@@ -1,59 +1,35 @@
-import { motion } from 'framer-motion'
 import { certifications } from '../data/certifications'
-import ScrollArrow from './ScrollArrow'
+import { useLanguage, pick } from '../contexts/LanguageContext'
+import { useStringsFor } from '../i18n/strings'
+import Section from './ui/Section'
+import Reveal from './ui/Reveal'
+import ExternalLink from './ui/ExternalLink'
 
 export default function Certifications() {
+  const { lang } = useLanguage()
+  const t = useStringsFor(lang)
+
   if (!certifications.length) return null
 
   return (
-    <section
-      id="certifications"
-      className="py-20 px-6 bg-[#F9FBF8] dark:bg-dark-canvas"
-      aria-labelledby="certifications-heading"
-    >
-      <div className="max-w-3xl mx-auto">
-        <motion.h2
-          id="certifications-heading"
-          className="section-title"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          Certificações
-        </motion.h2>
-        <motion.p
-          className="section-subtitle mb-10"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
-          Credenciais e links para verificação.
-        </motion.p>
-        <ul className="space-y-3" role="list">
-          {certifications.map((cert, index) => (
-            <motion.li
-              key={cert.id}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-            >
-              <a
+    <Section id="certifications" index="07" eyebrow={t.certifications.eyebrow} title={t.certifications.title}>
+      <ul className="divide-y divide-[var(--divider-decorative)] border-y border-[var(--divider-decorative)]" role="list">
+        {certifications.map((cert, index) => {
+          const title = pick(cert.title, lang)
+          return (
+            <Reveal key={cert.id} as="li" delay={Math.min(index * 0.04, 0.16)}>
+              <ExternalLink
                 href={cert.credentialUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-between gap-4 py-3 px-4 rounded-lg border border-[#E5DBCF] dark:border-dark-border-medium bg-[#F9FBF8] dark:bg-dark-border-soft text-[#17161C] dark:text-dark-text-primary hover:border-accent-primary dark:hover:border-dark-accent-primary/50 hover:text-accent-primary dark:hover:text-dark-accent-primary transition-all hover:shadow-subtle"
+                className="flex min-h-11 flex-wrap items-center justify-between gap-x-6 gap-y-1 py-4 text-[var(--text)] no-underline hover:text-[var(--link)]"
+                accessibleName={`${t.actions.credential}: ${title}`}
               >
-                <span>{cert.title}</span>
-                <span className="text-[#17161C]/50 dark:text-dark-text-secondary text-xs shrink-0">Ver credencial →</span>
-              </a>
-            </motion.li>
-          ))}
-        </ul>
-      </div>
-      <ScrollArrow targetId="skills" />
-    </section>
+                <span className="font-sans text-body font-semibold">{title}</span>
+                <span className="link-inline font-sans text-meta">{t.actions.credential}</span>
+              </ExternalLink>
+            </Reveal>
+          )
+        })}
+      </ul>
+    </Section>
   )
 }
