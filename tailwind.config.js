@@ -5,54 +5,50 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+        // Georgia é uma serif de sistema: título editorial sem nova dependência.
+        display: ['Georgia', '"Times New Roman"', 'serif'],
+        sans: ['Inter', 'system-ui', '-apple-system', '"Segoe UI"', 'sans-serif'],
+        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'monospace'],
       },
       colors: {
-        // Paleta clara personalizada
-        canvas: '#F9FBF8',
-        text: {
-          primary: '#17161C',
+        // As cinco cores da paleta, para quando o papel é fixo (ex.: fundo de logo).
+        palette: {
+          mist: '#dce0d9',  // única cor clara da paleta
+          plum: '#31081f',  // mais escura; base do tema escuro
+          wine: '#6b0f1a',  // superfície de destaque
+          slate: '#595959', // texto secundário no claro
+          sage: '#808f85',  // texto secundário no escuro
         },
-        accent: {
-          primary: '#3C3233',
-          hover: '#17161C',
-        },
-        border: {
-          soft: '#E5DBCF',
-        },
-        // Paleta escura personalizada
-        dark: {
-          canvas: '#17161C',
-          text: {
-            primary: '#F9FBF8',
-            secondary: '#DFD1C4',
-          },
-          accent: {
-            primary: '#DFD1C4',
-            hover: '#E5DBCF',
-          },
-          border: {
-            soft: '#3C3233',
-            medium: '#3C3233',
-          },
-        },
+        // Papéis semânticos. Resolvem por tema e também dentro de painéis locais
+        // (.panel-navy / .panel-accent), o que o variante `dark:` sozinho não faria.
+        bg: 'var(--bg)',
+        surface: 'var(--surface)',
+        heading: 'var(--heading)',
+        ink: 'var(--text)',
+        'ink-soft': 'var(--text-secondary)',
+        link: 'var(--link)',
+        edge: 'var(--border-control)',
+        'edge-soft': 'var(--divider-decorative)',
+        focusring: 'var(--focus)',
       },
-      backgroundImage: {
-        'gradient-cta': 'linear-gradient(135deg, #3C3233 0%, #17161C 100%)',
-        'gradient-cta-dark': 'linear-gradient(135deg, #DFD1C4 0%, #E5DBCF 100%)',
-        'gradient-subtle': 'linear-gradient(135deg, #F9FBF8 0%, #E5DBCF 100%)',
-      },
-      boxShadow: {
-        'subtle': '0 2px 8px rgba(0, 0, 0, 0.08)',
-        'soft': '0 4px 16px rgba(0, 0, 0, 0.12)',
-        'accent-glow': '0 0 20px rgba(60, 50, 51, 0.2)',
-        'accent-glow-dark': '0 0 20px rgba(223, 209, 196, 0.3)',
-        'led-glow': '0 0 15px rgba(229, 219, 207, 0.6), 0 0 30px rgba(229, 219, 207, 0.4)',
+      maxWidth: {
+        content: '75rem',
+        reading: '68ch',
       },
       spacing: {
-        18: '4.5rem',
-        22: '5.5rem',
+        section: 'clamp(3.5rem, 7vw, 6rem)',
+        gutter: 'clamp(1rem, 4vw, 2.5rem)',
+      },
+      fontSize: {
+        hero: ['clamp(2.75rem, 1.75rem + 4vw, 5.25rem)', { lineHeight: '1.04', letterSpacing: '-0.02em' }],
+        section: ['clamp(2rem, 1.5rem + 2vw, 3.25rem)', { lineHeight: '1.1', letterSpacing: '-0.015em' }],
+        card: ['clamp(1.25rem, 1rem + 0.6vw, 1.625rem)', { lineHeight: '1.2' }],
+        body: ['clamp(1rem, 0.96rem + 0.2vw, 1.125rem)', { lineHeight: '1.65' }],
+        meta: ['0.875rem', { lineHeight: '1.5' }],
+      },
+      transitionDuration: {
+        fast: 'var(--motion-fast)',
+        normal: 'var(--motion-normal)',
       },
     },
   },

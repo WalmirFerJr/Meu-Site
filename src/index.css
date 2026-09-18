@@ -2,88 +2,280 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
+/*
+ * Tokens por função. Paleta: #dce0d9 #31081f #6b0f1a #595959 #808f85.
+ *
+ * Contrastes medidos entre as cinco cores:
+ *   mist / plum   13,25  AA normal
+ *   mist / wine    9,19  AA normal
+ *   mist / slate   5,24  AA normal
+ *   plum / sage    5,22  AA normal
+ *   wine / sage    3,62  só texto grande
+ *   mist / sage    2,54  ·  plum / wine 1,44  ·  plum / slate 2,53
+ *   wine / slate   1,75  ·  slate / sage 2,06   — nenhum serve para texto
+ *
+ * Decisão de composição: os vermelhos (plum e wine) NÃO são fundo de página.
+ * Eles entram como acento — texto e botão no tema claro, e blocos preenchidos
+ * com texto mist por cima. O fundo escuro é um carvão neutro derivado do sage,
+ * porque contra ele os vermelhos ficam em ~1,2:1 e seriam invisíveis como
+ * linha, borda ou texto.
+ */
+:root {
+  --color-mist: #dce0d9;
+  --color-plum: #31081f;
+  --color-wine: #6b0f1a;
+  --color-slate: #595959;
+  --color-sage: #808f85;
+
+  /* Carvão neutro: sage a 22% sobre preto. mist 12,38:1 · sage 4,88:1. */
+  --color-charcoal: #1c1f1d;
+
+  color-scheme: light;
+  --bg: var(--color-mist);
+  --surface: color-mix(in srgb, var(--color-slate) 10%, var(--color-mist));
+  --heading: var(--color-plum);
+  --text: var(--color-plum);
+  --text-secondary: var(--color-slate);
+  --accent: var(--color-wine);
+  --link: var(--color-wine);
+  --border-control: var(--color-plum);
+  --divider-decorative: color-mix(in srgb, var(--color-slate) 38%, transparent);
+  --focus: var(--color-plum);
+  --button-bg: var(--color-wine);
+  --button-ink: var(--color-mist);
+  --button-border: var(--color-wine);
+  --button-secondary-ink: var(--color-plum);
+  --button-secondary-border: var(--color-plum);
+  /* Bloco de acento: único lugar onde o vinho preenche área. */
+  --accent-block-bg: var(--color-wine);
+  --accent-block-ink: var(--color-mist);
+
+  --header-height: 4.5rem;
+  --anchor-offset: calc(var(--header-height) + 1.5rem);
+  --focus-width: 3px;
+  --focus-offset: 3px;
+  --motion-fast: 180ms;
+  --motion-normal: 320ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-body {
-  @apply antialiased font-sans;
-  background-color: #F9FBF8;
-  color: #17161C;
-  transition: background-color 0.3s ease, color 0.3s ease;
+.dark {
+  color-scheme: dark;
+  --bg: var(--color-charcoal);
+  --surface: color-mix(in srgb, var(--color-sage) 10%, var(--color-charcoal));
+  --heading: var(--color-mist);
+  --text: var(--color-mist);
+  --text-secondary: var(--color-sage);
+  /* Vinho e ameixa ficam em ~1,2:1 aqui: o acento textual é o sage. */
+  --accent: var(--color-sage);
+  --link: var(--color-sage);
+  --border-control: var(--color-sage);
+  --divider-decorative: color-mix(in srgb, var(--color-sage) 30%, transparent);
+  --focus: var(--color-sage);
+  --button-bg: var(--color-mist);
+  --button-ink: var(--color-charcoal);
+  --button-border: var(--color-mist);
+  --button-secondary-ink: var(--color-mist);
+  --button-secondary-border: var(--color-sage);
+  --accent-block-bg: var(--color-wine);
+  --accent-block-ink: var(--color-mist);
 }
 
-.dark body {
-  background-color: #17161C;
-  color: #F9FBF8;
+/*
+ * Painel invertido: a pausa visual entre seções, em qualquer tema.
+ * No claro é o carvão contra o mist; no escuro, um degrau acima do fundo.
+ * Não é vermelho — o ritmo vem de claro/escuro, não de cor quente.
+ */
+.panel-invert {
+  color-scheme: dark;
+  --bg: var(--color-charcoal);
+  /* Superfície recuada, não clareada: clarear derrubava o sage para 4,17:1. */
+  --surface: color-mix(in srgb, var(--color-charcoal) 72%, #000000);
+  --heading: var(--color-mist);
+  --text: var(--color-mist);
+  --text-secondary: var(--color-sage);
+  --accent: var(--color-sage);
+  --link: var(--color-sage);
+  --border-control: var(--color-sage);
+  --divider-decorative: color-mix(in srgb, var(--color-sage) 30%, transparent);
+  --focus: var(--color-sage);
+  --button-bg: var(--color-mist);
+  --button-ink: var(--color-charcoal);
+  --button-border: var(--color-mist);
+  --button-secondary-ink: var(--color-mist);
+  --button-secondary-border: var(--color-sage);
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+/*
+ * No tema escuro a faixa desce em vez de subir: clarear o painel derrubava o
+ * sage de 4,90 para 4,40:1. Escurecendo, o contraste sobe para 5,37:1 e a
+ * fronteira fica marcada por um filete.
+ */
+.dark .panel-invert {
+  --bg: color-mix(in srgb, var(--color-charcoal) 70%, #000000);
+  --surface: var(--color-charcoal);
+  border-block: 1px solid color-mix(in srgb, var(--color-sage) 22%, transparent);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply antialiased font-sans text-body;
+    background-color: var(--bg);
+    color: var(--text);
+  }
+
+  h1, h2, h3 {
+    @apply font-display;
+    color: var(--heading);
+  }
+
+  /* Âncoras não ficam encobertas pelo header fixo. */
+  [id] {
+    scroll-margin-top: var(--anchor-offset);
+  }
+
+  :focus-visible {
+    outline: var(--focus-width) solid var(--focus);
+    outline-offset: var(--focus-offset);
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-plum);
+    color: var(--color-mist);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root {
+      --motion-fast: 0ms;
+      --motion-normal: 0ms;
+    }
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
 
 @layer components {
-  .section-title {
-    @apply text-3xl md:text-4xl font-semibold text-[#17161C] dark:text-dark-text-primary mb-2 font-sans;
+  .shell {
+    @apply mx-auto w-full max-w-content px-gutter;
   }
-  .section-title::after {
-    content: '';
-    @apply block w-12 h-0.5 rounded-full mt-3;
-    background: linear-gradient(to right, #3C3233, #17161C);
+
+  .section {
+    padding-block: theme('spacing.section');
   }
-  .dark .section-title::after {
-    background: linear-gradient(to right, #DFD1C4, #E5DBCF);
+
+  /* Rótulo curto acima do título. Cor sólida, sem opacidade. */
+  .eyebrow {
+    @apply font-sans text-meta font-semibold uppercase tracking-[0.18em];
+    color: var(--text-secondary);
   }
-  .section-subtitle {
-    @apply text-[#17161C]/70 dark:text-dark-text-secondary text-lg max-w-2xl;
+
+  .section-heading {
+    @apply font-display text-section;
+    color: var(--heading);
   }
+
+  .lede {
+    @apply max-w-reading text-body;
+    color: var(--text-secondary);
+  }
+
+  /* --- Ações --- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-5 font-sans text-meta font-semibold no-underline;
+    min-height: 2.75rem; /* alvo de toque de 44px */
+    border: 2px solid transparent;
+    transition: background-color var(--motion-normal) var(--ease-out),
+      color var(--motion-normal) var(--ease-out),
+      border-color var(--motion-normal) var(--ease-out);
+  }
+
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-lg transition-all;
-    background: linear-gradient(135deg, #3C3233 0%, #17161C 100%);
-    color: #F9FBF8;
+    background-color: var(--button-bg);
+    color: var(--button-ink);
+    border-color: var(--button-border);
   }
-  .dark .btn-primary {
-    background: linear-gradient(135deg, #DFD1C4 0%, #E5DBCF 100%);
-    color: #17161C;
-  }
+  /* Hover escurece a borda em vez de mexer no par texto/fundo aprovado. */
   .btn-primary:hover {
-    filter: brightness(1.1);
-    box-shadow: 0 0 20px rgba(60, 50, 51, 0.3);
-    transform: translateY(-1px);
+    border-color: var(--text);
   }
-  .dark .btn-primary:hover {
-    box-shadow: 0 0 20px rgba(223, 209, 196, 0.4);
-  }
+
   .btn-secondary {
-    @apply inline-flex items-center gap-2 px-6 py-3 border border-[#E5DBCF] dark:border-dark-border-medium text-[#17161C] dark:text-dark-text-primary font-medium rounded-lg transition-colors hover:border-accent-primary dark:hover:border-dark-accent-primary hover:text-accent-primary dark:hover:text-dark-accent-primary;
+    background-color: transparent;
+    color: var(--button-secondary-ink);
+    border-color: var(--button-secondary-border);
   }
-  .card-glass {
-    @apply bg-[#F9FBF8] dark:bg-dark-border-soft backdrop-blur-md border border-[#E5DBCF] dark:border-dark-border-medium shadow-subtle;
+  .btn-secondary:hover {
+    background-color: var(--surface);
   }
-}
 
-/* Liquid gooey effect filters */
-.liquid-blur {
-  filter: url(#gooey);
-}
-
-/* Smooth fade-in animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+  /* --- Links --- */
+  /* Link de ação isolado: sublinhado de link, mas com alvo de toque de 44px.
+     O critério do projeto é 44x44, acima do mínimo AA de 24x24 do WCAG 2.2. */
+  .link-action {
+    @apply inline-flex items-center gap-2;
+    min-height: 2.75rem;
   }
-  to {
-    opacity: 1;
+
+  .link-inline {
+    color: var(--link);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+    transition: text-decoration-thickness var(--motion-fast) var(--ease-out);
+  }
+  .link-inline:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Superfície de conteúdo. Borda sólida, sem vidro nem sombra colorida. */
+  .panel {
+    background-color: var(--surface);
+    border: 1px solid var(--divider-decorative);
+    @apply rounded-lg;
+  }
+  
+
+  .rule {
+    border: 0;
+    border-top: 1px solid var(--divider-decorative);
+  }
+  
+
+  .skip-link {
+    @apply absolute left-4 top-4 z-[100] rounded-md px-4 py-3 font-sans text-meta font-semibold no-underline;
+    background-color: var(--color-plum);
+    color: var(--color-mist);
+    transform: translateY(-160%);
+    transition: transform var(--motion-normal) var(--ease-out);
+  }
+  .skip-link:focus-visible {
     transform: translateY(0);
   }
 }
 
-.fade-in-up {
-  animation: fadeInUp 0.6s ease-out;
-}
-
-/* Glow effects for LED animation */
-.glow-light {
-  box-shadow: 0 0 20px rgba(60, 50, 51, 0.6), 0 0 40px rgba(60, 50, 51, 0.4), inset 0 0 20px rgba(60, 50, 51, 0.2);
-}
-
-.dark .glow-dark {
-  box-shadow: 0 0 20px rgba(223, 209, 196, 0.6), 0 0 40px rgba(223, 209, 196, 0.4), inset 0 0 20px rgba(223, 209, 196, 0.2);
+@layer utilities {
+  .sr-only-focusable:not(:focus):not(:focus-within) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
 }
