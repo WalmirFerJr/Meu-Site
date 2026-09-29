@@ -38,19 +38,6 @@ export const projects = [
     },
     demoUrl: null,
   },
-  {
-    id: 'bot-telegram-usp',
-    featured: false,
-    title: { pt: 'Bot para canal do Telegram da USP', en: 'Telegram bot for a USP channel' },
-    description: {
-      pt: 'Bot em Python em produção, que atende mais de 500 alunos. Lógicas de agendamento e contagem regressiva para notificações.',
-      en: 'A Python bot running in production, serving more than 500 students. Scheduling and countdown logic for notifications.',
-    },
-    tech: ['Python', 'APIs', 'Linux', 'AWS'],
-    repo: 'https://github.com/dasiusp/IntercompBot',
-    repoLabel: { pt: 'Ver repositório do bot', en: 'View the bot repository' },
-    demoUrl: null,
-  },
   /* Registro inativo — não publicar sem pedido do proprietário.
   {
     id: 'triagem-hospitalar',

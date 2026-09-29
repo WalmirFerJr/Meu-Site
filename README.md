@@ -33,7 +33,7 @@ Tudo em `src/data/`. Nenhum texto de conteúdo mora dentro de componente.
 | Arquivo | Conteúdo |
 | --- | --- |
 | `profile.js` | Nome, foto, localidade, contatos, currículo, parágrafos do "Sobre", interesses de estudo, instituições do Hero |
-| `experience.js` | Três experiências, contribuições e os resultados numéricos de cada uma |
+| `experience.js` | Experiências profissionais e gestão de pessoas no DASI, com resultados atribuídos à atuação correspondente |
 | `projects.js` | Projetos publicados (e um registro inativo, comentado) |
 | `education.js` | Formação |
 | `skills.js` | Grupos de habilidades e idiomas |
