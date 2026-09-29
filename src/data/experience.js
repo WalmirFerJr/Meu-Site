@@ -99,31 +99,23 @@ export const experiences = [
     // A logo é da USP, instituição onde o diretório atua; não é marca do DASI.
     logoInstitution: 'Universidade de São Paulo (USP)',
     kind: 'academic',
-    role: { pt: 'Coordenador de TI', en: 'IT Coordinator' },
+    role: { pt: 'Gestão de pessoas', en: 'People management' },
     area: { pt: 'USP – EACH', en: 'USP – EACH' },
     period: { pt: 'Mar 2025 – Atual', en: 'Mar 2025 – Present' },
     current: true,
-    focus: ['Python', 'AWS', 'Java', 'Git'],
+    focus: [],
     points: {
       pt: [
-        'Desenvolvi trilhas de aprendizado Full Stack e a primeira trilha de AWS do meu curso, auxiliando calouros no desenvolvimento de habilidades técnicas complementares à grade acadêmica.',
-        'Automatizei eventos impactando mais de 500 alunos da USP através de bots em Python rodando em infraestrutura AWS.',
+        'Organização de onboarding e acompanhamento da integração de novos membros do diretório acadêmico.',
+        'Organização de sistemas de feedback contínuo e eventos de integração de alunos, cursos e entidades da USP.',
       ],
       en: [
-        'I developed Full Stack learning tracks and the first AWS track of my degree programme, helping first-year students build technical skills that complement the curriculum.',
-        'I automated events reaching more than 500 USP students through Python bots running on AWS infrastructure.',
+        'Organising onboarding and supporting the integration of new student council members.',
+        'Organising continuous feedback systems and events to bring USP students, courses and student bodies together.',
       ],
     },
-    results: [
-      {
-        value: '+500',
-        label: {
-          pt: 'alunos da USP alcançados pelas automações',
-          en: 'USP students reached by the automations',
-        },
-      },
-    ],
-    stack: ['Python', 'AWS', 'Java', 'Git'],
+    results: [],
+    stack: [],
   },
 ]
 

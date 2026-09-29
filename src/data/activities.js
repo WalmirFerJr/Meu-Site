@@ -40,8 +40,8 @@ export const activities = [
   {
     id: 'dasi-semana-si',
     title: {
-      pt: 'Grupo de Estudos (DASI) e Semana de S.I. (USP)',
-      en: 'Study Group (DASI) and Information Systems Week (USP)',
+      pt: 'Gestão de pessoas (DASI) e Semana de S.I. (USP)',
+      en: 'People management (DASI) and Information Systems Week (USP)',
     },
     period: { pt: 'Desde Mar 2025', en: 'Since Mar 2025' },
     url: 'https://semanadesi.com',

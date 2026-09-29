@@ -75,12 +75,14 @@ function ExperienceItem({ experience, strings, lang, index }) {
           </div>
         )}
 
-        <div className="mt-6">
-          <h4 className="eyebrow mb-2">{strings.experience.stackLabel}</h4>
-          <p className="font-sans text-meta text-[var(--text-secondary)]">
-            {[...new Set([...experience.focus, ...experience.stack])].join(' · ')}
-          </p>
-        </div>
+        {(experience.focus.length > 0 || experience.stack.length > 0) && (
+          <div className="mt-6">
+            <h4 className="eyebrow mb-2">{strings.experience.stackLabel}</h4>
+            <p className="font-sans text-meta text-[var(--text-secondary)]">
+              {[...new Set([...experience.focus, ...experience.stack])].join(' · ')}
+            </p>
+          </div>
+        )}
       </div>
     </Reveal>
   )
